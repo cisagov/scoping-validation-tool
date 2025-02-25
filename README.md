@@ -39,7 +39,8 @@ Scoping Validation Tool
 
 positional arguments:
   assessment_id         The Assessement ID - this is required
-  {verify_ip,verify_domain,web_services,subdomains}
+  {scoper,verify_ip,verify_domain,web_services,subdomains}
+    scoper              -f, --file (A File that contains IP's in CIDR notation
     verify_ip           -i, --ip (A single IP to be verified) OR -f, --file (A File that
                         contains a list of ips to be verified)
     verify_domain       -d, --domain (A single domain to be verified) OR -f, --file (A File that
@@ -51,6 +52,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
 ```
+
+## Menu Option: scoper 
 
 ## Menu Option: verify_ip 
 **Objective:** The purpose of this option is to validate the scope of an IP or IPs entered by extracting information from *Whois* 
