@@ -441,7 +441,7 @@ def main():
 
     # creating sub parsers
     subparser = parser.add_subparsers(dest='cmd')
-    scoper_parser = subparser.add_parser('scoper', help="Scoping subcommand")
+    scoper_parser = subparser.add_parser('scoper', help="-f, --file (A File that contains IP's in CIDR notation)")
     verify_ip = subparser.add_parser('verify_ip', help="-i, --ip  (A single IP to be verified) "
                                                        "OR -f, --file (A File that contains a "
                                                        "list of ips to be verified)")
