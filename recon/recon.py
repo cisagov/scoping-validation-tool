@@ -68,6 +68,46 @@ def country_message(query, country, message=''):
     else:
         print(f"{Bcolors.WARNING} {query} could not determine location. Country extracted is None.{Bcolors.ENDC}\n")
 
+def scoper(assessment_id, file):
+    if file is None:
+        raise ValueError("File cannot be None")
+
+    file_path = file.name  # Extract filename
+    output_file = f"{assessment_id}_InScope.txt"
+
+    try:
+        # Run nmap and capture output
+        nmap_result = subprocess.run(
+            ["nmap", "-Pn", "-n", "-sL", "-iL", file_path], 
+            stdout=subprocess.PIPE, 
+            text=True, 
+            check=True
+        ).stdout
+
+        # Process output with cut
+        cut_result = subprocess.run(
+            ["cut", "-d", " ", "-f", "5"],
+            input=nmap_result,  # Pass as string
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True
+        ).stdout
+
+        # Remove unwanted lines using grep
+        grep_result = subprocess.run(
+            ["grep", "-v", "nmap\|address"],
+            input=cut_result,  # Pass as string
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True
+        ).stdout
+
+        # Write final output to the file
+        with open(output_file, "w") as out_f:
+            out_f.write(grep_result)
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing command: {e}")
 
 def verify_ip_address(assessment_id, ip=None, file=None):
     """ This function takes in an IP or a file listed with IPs and outputs a file that contains the
@@ -401,6 +441,7 @@ def main():
 
     # creating sub parsers
     subparser = parser.add_subparsers(dest='cmd')
+    scoper_parser = subparser.add_parser('scoper', help="Scoping subcommand")
     verify_ip = subparser.add_parser('verify_ip', help="-i, --ip  (A single IP to be verified) "
                                                        "OR -f, --file (A File that contains a "
                                                        "list of ips to be verified)")
@@ -418,6 +459,8 @@ def main():
     subdomains = subdomains.add_mutually_exclusive_group()
 
     # arguments for every subparser
+    scoper_parser.add_argument('-f', '--file', type=argparse.FileType('r'), required=True,
+                               help='A file that contains a list of IPs to be verified')
     verify_ip.add_argument('-i', '--ip', type=str,
                            help='A single IP to be verified')
     verify_ip.add_argument('-f', '--file', type=argparse.FileType('r'),
@@ -437,6 +480,9 @@ def main():
                             help='A single domain to enumerate sub domains')
 
     args = parser.parse_args()
+
+    if args.cmd == 'scoper':
+        scoper(args.assessment_id, args.file)
 
     if args.cmd == 'verify_ip':
         verify_ip_address(args.assessment_id, args.ip, args.file)
