@@ -73,7 +73,7 @@ def scoper(assessment_id, file):
         raise ValueError("File cannot be None")
 
     file_path = file.name  # Extract filename
-    output_file = f"{assessment_id}_InScope.txt"
+    output_file = f"{assessment_id}_Scoper.txt"
 
     try:
         # Run nmap and capture output
