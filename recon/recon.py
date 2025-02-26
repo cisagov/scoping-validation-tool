@@ -12,6 +12,9 @@ Created, in part, with funding and support from the United States Government. (s
 DM22-0416
 ____________________________________
 Examples of how to run:
+recon RVA-123 scoper -f File_With_CIDR_IPs.txt
+recon RVA-123 scoper --file File_With_CIDR_IPs.txt
+
 recon RVA123 verify_ip -i 8.8.8.8
 recon RVA123 verify_ip --ip 8.8.8.8
 recon RVA123 verify_ip -f ips.txt
