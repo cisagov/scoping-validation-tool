@@ -33,12 +33,12 @@ The executable file for SVT is ```$HOME/.local/bin/recon```. Using the ```recon 
 
 ```commandline
 $ recon -h
-usage: recon [-h] assessment_id {verify_ip,verify_domain,web_services,subdomains} ...
+usage: recon [-h] assessment_id {scoper,verify_ip,verify_domain,web_services,subdomains} ...
 
 Scoping Validation Tool
 
 positional arguments:
-  assessment_id         The Assessement ID - this is required
+  assessment_id         The Assessment ID - this is required
   {scoper,verify_ip,verify_domain,web_services,subdomains}
     scoper              -f, --file (A File that contains IP's in CIDR notation
     verify_ip           -i, --ip (A single IP to be verified) OR -f, --file (A File that
