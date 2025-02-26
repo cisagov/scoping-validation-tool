@@ -53,7 +53,23 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-## Menu Option: scoper 
+## Menu Option: scoper
+**Objective:** The purpose of this option is to take a file of IP's in CIDR notation and output a file containing a full list of IP's. 
+This can be helpful as the Scoping Validation Tool only accepts a list of IP's which are not in CIDR notation.
+
+```scoper``` takes a file of IP's in CIDR notation and outputs the full list of IP's in that range.
+
+Output File: ./{assessment_id}_Scoper.txt"
+
+Input File: List of ips in CIDR notation, where each item is entered line by line with no commas separating them
+
+##### Example On How to Run With a File That Contains IPs in CIDR notation:
+
+You can pass a file in the ```scoper``` option using the ```-f``` or the ```--file``` flag
+
+```commandline
+$ recon RVA-123 scoper -f File_With_CIDR_IPs.txt
+```
 
 ## Menu Option: verify_ip 
 **Objective:** The purpose of this option is to validate the scope of an IP or IPs entered by extracting information from *Whois* 
