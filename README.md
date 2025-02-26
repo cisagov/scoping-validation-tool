@@ -266,7 +266,7 @@ $ recon RVA-123 web_services -f test-data/10-ips.txt
 You can pass a domain in the ```subdomains``` option using the ```-d``` or the ```--domain``` flag
 
 ```commandline
-$ python recon.py RVA-123 subdomains -d aldi.us
+$ recon RVA-123 subdomains -d aldi.us
 aldi.us
 mobile.wfm.aldi.us
 gateway.aldi.us
