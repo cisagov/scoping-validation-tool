@@ -109,6 +109,8 @@ def scoper(assessment_id, file):
         with open(output_file, "w") as out_f:
             out_f.write(grep_result)
 
+        print(f'\n{Bcolors.OKBLUE}File was outputed in the current working directory to: {assessment_id}_Scoper.txt{Bcolors.ENDC}')
+
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
 
